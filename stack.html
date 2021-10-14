@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html> <head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Stack Page</title>
+    <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style></head>
+
+
+
+<body background="back2.png">
+    <div class="container-fluid align-center" align="middle">
+    <h2 style="color:rgb(233, 16, 99)"> Harika Chintala builds a Stack</h2>
+    <input type="text" id="inp_val" name="inputElement" placeholder="Enter the Text">
+    <p> Press the button to create an new element of type div and then add it to the container.
+    </p>
+    <button id="push" onclick="makeNewDiv()" class="btn btn-primary">Push Value</button>
+    <button id="pop" onclick="popItem()" class="btn btn-success">Pop Value</button>
+    <button id="zap" onclick="zap()" class="btn btn-info">Zap Value</button><br>
+    <br>
+    <br>
+		<div class="flex-container" id="target">
+		  <div class="stack">row item 1</div>   
+		  <div class="stack">row item 2</div>  
+		  <div class="stack">row item 3</div>  
+		</div>	
+	
+	</div>
+    <br>
+    <br>
+</body>
+<script>
+	function makeNewDiv() {
+        /* make the div and its text */
+        let element = document.createElement("div")
+        i_value = document.getElementById("inp_val").value
+        element.innerHTML = i_value
+        element.className = "stack"
+        /* add it to the container */
+        document.getElementById('target').appendChild(element)
+    }
+    function popItem() {
+        stack_values = document.getElementsByClassName("stack")
+        i_value = document.getElementById("inp_val").value
+        length = stack_values.length
+        if (stack_values != undefined && length > 0) {
+            stack_values[length - 1].remove();
+        }
+    }
+    function zap() {
+        i_value = document.getElementById("inp_val").value;
+        stack_values = document.getElementsByClassName('stack');
+        if (stack_values != undefined && stack_values.length > 0) {
+            for (let i = 0; i < stack_values.length; i++) {
+                element = stack_values[i].innerHTML;
+                if (element == i_value) {
+                    console.log(stack_values[i])
+                    stack_values[i].remove();
+                    i--;
+                }
+
+            }
+        }
+    }
+</script>
+</html>	
